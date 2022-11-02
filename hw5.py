@@ -103,10 +103,14 @@ def count_all_words(filenames):
         words_list = get_words(text)
         word_count, word_dict = count_words(words_list)
         for word, count in word_dict.items():
+            if word not in total_counts:
+                total_counts[word] = count
+            else:
+                total_counts[word] += count
             word_dict[word] = count/word_count
-        title_to_counter[filename] = word_dict
+        title_to_counter[title] = word_dict
 
-    return [], {}, {}
+    return all_titles, title_to_counter, total_counts
 
 
 def encode_word_counts(all_titles, title_to_counter, total_counts, num_words):
@@ -118,6 +122,7 @@ def encode_word_counts(all_titles, title_to_counter, total_counts, num_words):
     common overall word in the i-th article (i.e., the article corresponding to 
     the i-th title in titles).
     """
+
     return numpy.matrix([[]])
 
 
